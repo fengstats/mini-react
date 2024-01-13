@@ -1,9 +1,26 @@
-// v0.1 写死发布就完事了
+// v0.2
+// Dom 写死
+// vDom 动态生成
+// type/props/children
+const textEl = {
+  type: 'TEXT_ELEMENT',
+  props: {
+    nodeValue: 'Hello! mini react',
+  },
+  children: [],
+}
+
+const el = {
+  type: 'div',
+  props: {
+    id: 'app',
+  },
+  children: [textEl],
+}
 const root = document.querySelector('#root')
-const app = document.createElement('div')
-const textElement = document.createTextNode('Hello! mini react')
-// 设置 id，添加文本元素节点
-app.id = 'app'
-app.append(textElement)
-// 最后添加到 root 元素节点
+const app = document.createElement(el.type)
+const textDom = document.createTextNode('')
+textDom.nodeValue = textEl.props.nodeValue
+app.id = el.props.id
+app.append(textDom)
 root.append(app)
