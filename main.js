@@ -3,11 +3,11 @@
 // vDom 动态生成
 // type/props/children
 
-const textTypeName = 'TEXT_ELEMENT'
+const TEXT_TYPE_NAME = 'TEXT_ELEMENT'
 
 function createTextNode(nodeValue) {
   return {
-    type: textTypeName,
+    type: TEXT_TYPE_NAME,
     props: {
       nodeValue,
     },
@@ -19,11 +19,12 @@ function createElement(type, props, ...children) {
   return {
     type,
     props,
-    children,
+    // 优化 children 参数，如果传入的是字符串自动处理成 vDom 数据结构
+    children: children.map((child) => (typeof child === 'string' ? createTextNode(child) : child)),
   }
 }
 
-// 想要动态生成就得找到相同点和不同点，首先是其动作都是一致的
+// 想要动态生成就得找到行为的相同点和不同点，首先发现其动作都是一致的
 // 1. 创建 Dom
 // 2. 对 props 属性赋值
 // 3. 挂载 Dom
@@ -31,7 +32,7 @@ function createElement(type, props, ...children) {
 // 可以实现一个 render 函数来做这些重复性的工作，但需要考虑到兼容问题
 function render(el, mountNodeDom) {
   // type
-  const dom = el.type === textTypeName ? document.createTextNode('') : document.createElement(el.type)
+  const dom = el.type === TEXT_TYPE_NAME ? document.createTextNode('') : document.createElement(el.type)
 
   // props
   for (const key of Object.keys(el.props)) {
@@ -49,9 +50,10 @@ function render(el, mountNodeDom) {
 }
 
 // VDom 动态生成
-const textEl = createTextNode('hi, mini react')
-const textEl2 = createTextNode(", I'm xiaoxiaoshi")
-const appEl = createElement('div', { id: 'app' }, textEl, textEl2)
+// const textEl = createTextNode('hi, mini react')
+// const textEl2 = createTextNode(", I'm xiaoxiaoshi")
+// const appEl = createElement('div', { id: 'app' }, textEl, textEl2)
+const appEl = createElement('div', { id: 'app' }, 'hi, mini react', ', nice to learn from you!')
 const root = document.querySelector('#root')
 
 render(appEl, root)
