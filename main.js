@@ -1,5 +1,5 @@
-// v0.3
-// Dom 动态
+// v0.2
+// Dom 写死
 // vDom 动态生成
 // type/props/children
 function createTextNode(nodeValue) {
