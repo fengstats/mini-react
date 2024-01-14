@@ -1,4 +1,7 @@
-import React, { createElement } from './core/React'
+// 扩展知识 JSX pragma，可以自定义 JSX 解析方法名称
+// NOTE: 如果其他地方要改也需要写上标注
+/**@jsx FReact.createElement */
+import FReact, { createElement } from './core/React'
 
 const App = createElement('div', { id: 'app' }, 'hi, mini react', ', nice to learn from you!')
 
