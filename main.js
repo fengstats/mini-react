@@ -2,25 +2,35 @@
 // Dom 写死
 // vDom 动态生成
 // type/props/children
-const textEl = {
-  type: 'TEXT_ELEMENT',
-  props: {
-    nodeValue: 'Hello! mini react',
-  },
-  children: [],
+function createTextNode(nodeValue) {
+  return {
+    type: 'TEXT_ELEMENT',
+    props: {
+      nodeValue,
+    },
+    children: [],
+  }
 }
 
-const el = {
-  type: 'div',
-  props: {
-    id: 'app',
-  },
-  children: [textEl],
+function createElement(type, props, children) {
+  return {
+    type,
+    props,
+    children,
+  }
 }
+
+// VDom 动态生成
+const textEl = createTextNode('hi, mini react')
+const appEl = createElement('div', { id: 'app' }, [textEl])
+
+// Dom 写死
 const root = document.querySelector('#root')
-const app = document.createElement(el.type)
+const appDom = document.createElement(appEl.type)
 const textDom = document.createTextNode('')
+
+// 属性赋值与 Dom 挂载
 textDom.nodeValue = textEl.props.nodeValue
-app.id = el.props.id
-app.append(textDom)
-root.append(app)
+appDom.id = appEl.props.id
+appDom.append(textDom)
+root.append(appDom)
