@@ -1,5 +1,5 @@
-// v0.2
-// Dom 写死
+// v0.3
+// Dom 动态
 // vDom 动态生成
 // type/props/children
 function createTextNode(nodeValue) {
@@ -24,13 +24,17 @@ function createElement(type, props, children) {
 const textEl = createTextNode('hi, mini react')
 const appEl = createElement('div', { id: 'app' }, [textEl])
 
-// Dom 写死
+// 获取顶层 Dom
 const root = document.querySelector('#root')
+
+// 创建 Dom
 const appDom = document.createElement(appEl.type)
 const textDom = document.createTextNode('')
 
-// 属性赋值与 Dom 挂载
+// 赋值 props 属性
 textDom.nodeValue = textEl.props.nodeValue
 appDom.id = appEl.props.id
+
+// 挂载 Dom
 appDom.append(textDom)
 root.append(appDom)
