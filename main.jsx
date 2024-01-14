@@ -1,3 +1,4 @@
+// import App from './App-jsx-pragma'
 import App from './App'
 import React from './core/React'
 import ReactDOM from './core/ReactDOM'
