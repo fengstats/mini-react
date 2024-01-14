@@ -49,11 +49,23 @@ function render(el, mountNodeDom) {
   mountNodeDom.append(dom)
 }
 
-// VDom 动态生成
-// const textEl = createTextNode('hi, mini react')
-// const textEl2 = createTextNode(", I'm xiaoxiaoshi")
-// const appEl = createElement('div', { id: 'app' }, textEl, textEl2)
-const appEl = createElement('div', { id: 'app' }, 'hi, mini react', ', nice to learn from you!')
 const root = document.querySelector('#root')
 
-render(appEl, root)
+// VDom 动态生成
+const textEl = createTextNode('hi, mini react')
+const textEl2 = createTextNode(", I'm xiaoxiaoshi")
+// const appEl = createElement('div', { id: 'app' }, textEl, textEl2)
+const appEl = createElement('div', { id: 'app' }, 'hi, mini react', ', nice to learn from you!')
+
+// render(appEl, root)
+
+// 对齐 React API 使用
+const ReactDom = {
+  createRoot(mountNodeDom) {
+    return {
+      render: (App) => render(App, mountNodeDom),
+    }
+  },
+}
+
+ReactDom.createRoot(root).render(appEl)
