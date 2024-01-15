@@ -1,9 +1,9 @@
 import React from './React.js'
 
 const ReactDOM = {
-  createRoot(mountNodeDom) {
+  createRoot(root) {
     return {
-      render: (App) => React.render(App, mountNodeDom),
+      render: (el) => React.render(el, root),
     }
   },
 }

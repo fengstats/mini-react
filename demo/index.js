@@ -18,7 +18,7 @@ function stop() {
 }
 
 function workLoop(deadline) {
-  while (deadline.timeRemaining() > 1) {
+  while (deadline.timeRemaining() > 16.6) {
     console.log(`taskId: ${taskId} is running`)
   }
 
