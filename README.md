@@ -51,9 +51,9 @@ export default defineConfig({
 
 **我们自己实现的 render 方法递归可能会导致浏览器卡顿？**
 
-// TODO: 猜应该是 DOM 树嵌套层级太多了导致计算量很大导致的，但目前了解不深，没什么好的解决方案，所以后续待补充吧！
+应该是 DOM 树嵌套层级太深，导致计算量很大导致的，用 Fiber 架构实现任务调度来分批执行可以解决，也就是第二天的学习内容哈哈哈。
 
-### 代码链接
+### 代码
 
 - [v0.1](https://github.com/fengstats/mini-react/tree/v0.1)
 - [v0.2](https://github.com/fengstats/mini-react/tree/v0.2)
@@ -61,3 +61,29 @@ export default defineConfig({
 - [v0.3-jsx](https://github.com/fengstats/mini-react/tree/v0.3-jsx)
 
 ## 01-14 打卡
+
+### 学习
+
+1. 浏览器基础知识，认识到 JS 是单线程执行的，逻辑代码量过大时会造成阻塞。
+2. 一个新的浏览器 API `requestIdleCallback`，可以传入函数，会在浏览器空闲时间执行。
+3. 拆分任务的思想，大任务拆成小任务，小任务转换为立即行动。
+4. 把 DOM 树转换成平铺的链表结构，怎么去设计数据结构和怎么去更改指向。
+
+### 问题
+
+Fiber 架构的概念有点难懂。
+
+### 解决
+
+对于树转换链表那一块的知识其实还好，因为刷了不少链表 + 指针相关的算法题目，所以理解起来没那么费力，不过 Fiber 架构不一样，应该算是第一次正式了解它，主要还是从几个方面
+
+1. Fiber 架构是什么？一个任务调度器，拆分任务在空闲时间内执行。
+2. 它的历史？// TODO
+3. 它的出现解决了那些问题？优化 DOM 嵌套层级很深时的渲染问题。
+4. 怎么去实现一个最简 Fiber？利用 `requestIdleCallback` API。
+
+### 代码
+
+- [v0.4](https://github.com/fengstats/mini-react/tree/v0.4)
+
+## 01-15 打卡
