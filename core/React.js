@@ -24,7 +24,7 @@ function transformChildren(fiber, children) {
   let prevChild = null
   children.forEach((child, index) => {
     // 为了不污染 child 这个虚拟 DOM 上的数据，所以再定义一个变量
-    const newFiber = {
+    const newChild = {
       // 先把原来的属性都解构出来
       ...child,
       // 添加一些初始化属性以及赋值
@@ -35,7 +35,7 @@ function transformChildren(fiber, children) {
     }
     if (index === 0) {
       // 第一个 child 节点是大儿子
-      fiber.child = newFiber
+      fiber.child = newChild
     } else {
       // NOTE: 其余都是大儿子兄弟或其他儿子的兄弟
       // 举个例子：比如现在的 work 就是爹，children 里面有 son1、son2、son3 三个儿子
@@ -44,11 +44,11 @@ function transformChildren(fiber, children) {
       // 第二次找到 son2 二儿子，没有儿子，但是有兄弟，也就是 work 的大儿子，绑定上去
       // 第三次找到 son3 小儿子，没有儿子，但是有兄弟，不过这次是二儿子了，绑定上去
       // 以此类推...
-      prevChild.sibling = newFiber
+      prevChild.sibling = newChild
     }
     // 当前 child 已经处理完毕，存储下，留给下一个 child 使用
     // 这样当下一个 child 没有儿子的时候能找到兄弟
-    prevChild = fiber
+    prevChild = newChild
   })
 }
 
